@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gym.entities.Users;
+import com.gym.exception.UserNotFoundException;
 import com.gym.repository.UserRepository;
 
 @Service
@@ -30,7 +31,7 @@ public class UserService {
         return optionalUser.orElse(null);
     }
 
-    public String updateUser(Long id, Users updatedUser) {
+    public String updateUser(Long id, Users updatedUser) throws UserNotFoundException {
         Optional<Users> optionalUser = urepo.findById(id);
         if (optionalUser.isPresent()) {
             Users existingUser = optionalUser.get();
@@ -43,7 +44,7 @@ public class UserService {
             urepo.save(existingUser);
             return "User updated successfully";
         } else {
-            return "User not found";
+            throw new UserNotFoundException("User Not Found");
         }
     }
 
