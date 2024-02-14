@@ -1,8 +1,8 @@
 package com.gym.controller;
 
-import java.net.http.HttpHeaders;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,6 @@ public class ValidationController extends ResponseEntityExceptionHandler {
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		Map<String, String> errors = new HashMap<>();
 		ex.getBindingResult().getAllErrors().forEach((error) -> {
-
 			String fieldName = ((FieldError) error).getField();
 			String message = error.getDefaultMessage();
 			errors.put(fieldName, message);
