@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="trainer")
@@ -17,11 +18,17 @@ public class Trainer {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
+	@NotBlank(message = "Trainer name cannot be Blank")
 	@Column(name="trainerName")
 	private String trainerName;
 
+	@NotBlank(message = "Phone Number cannot be Blank")
 	@Column(name="phoneNo")
 	private String phoneNo;
+
+	@NotBlank(message = "Specialization cannot be Blank")
+	@Column(name="specialization")
+	private String specialization;
 
 	@ManyToOne
 	@JoinColumn(name = "gymID")
@@ -29,10 +36,12 @@ public class Trainer {
 
 	public Trainer() {}
 
-	public Trainer(Long id, String trainerName, String phoneNo , GymAdmin gymAdmin) {
+	public Trainer(Long id, String trainerName, String phoneNo, String specialization, GymAdmin gymAdmin) {
+		super();
 		this.id = id;
 		this.trainerName = trainerName;
 		this.phoneNo = phoneNo;
+		this.specialization = specialization;
 		this.gymAdmin = gymAdmin;
 	}
 
@@ -63,16 +72,18 @@ public class Trainer {
 		this.gymAdmin = gymAdmin;
 	}
 
-	@Override
-	public String toString() {
-		return "Trainer [id=" + id + ", trainerName=" + trainerName + ", phoneNo=" + phoneNo
-				+ ", gymAdmin=" + gymAdmin + "]";
+	public String getSpecialization() {
+		return specialization;
 	}
 
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
+	}
 
-
-
-
-
+	@Override
+	public String toString() {
+		return "Trainer [id=" + id + ", trainerName=" + trainerName + ", phoneNo=" + phoneNo + ", specialization="
+				+ specialization + ", gymAdmin=" + gymAdmin + "]";
+	}
 
 }

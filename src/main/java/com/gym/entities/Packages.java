@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="packages")
@@ -15,9 +17,11 @@ public class Packages {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long packageID;
 
+	@NotBlank(message = "Package name cannot be Blank")
 	@Column(name = "packageName")
 	private String packageName;
 
+	@Min(value = 999, message = "Fees Cannot Be Less Than 999")
 	@Column(name = "packageFees")
 	private int packageFees;
 

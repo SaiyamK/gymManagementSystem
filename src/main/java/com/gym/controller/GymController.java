@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gym.entities.GymAdmin;
 import com.gym.service.GymService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/gym")
 public class GymController {
@@ -24,7 +26,7 @@ public class GymController {
     private GymService gymService;
 
     @PostMapping("/add")
-    public String addGym(@RequestBody GymAdmin gymAdmin) {
+    public String addGym(@Valid @RequestBody GymAdmin gymAdmin) {
         return gymService.addGymAdmin(gymAdmin);
     }
 
@@ -40,7 +42,7 @@ public class GymController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateGymAdmin(@PathVariable Long id, @RequestBody GymAdmin updatedGymAdmin) {
+    public ResponseEntity<String> updateGymAdmin(@PathVariable Long id, @Valid @RequestBody GymAdmin updatedGymAdmin) {
         String result = gymService.updateGymAdmin(id, updatedGymAdmin);
         return ResponseEntity.ok(result);
     }

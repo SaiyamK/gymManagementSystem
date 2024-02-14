@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gym.entities.Packages;
 import com.gym.service.PackageService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/package")
 public class PackagesController {
@@ -24,7 +26,7 @@ public class PackagesController {
     private PackageService packService;
 
     @PostMapping("/add")
-    public String addPackage(@RequestBody Packages p) {
+    public String addPackage(@Valid @RequestBody Packages p) {
         return packService.addPackage(p);
     }
 
@@ -40,7 +42,7 @@ public class PackagesController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updatePackage(@PathVariable Long id, @RequestBody Packages updatedPackage) {
+    public ResponseEntity<String> updatePackage(@PathVariable Long id, @Valid @RequestBody Packages updatedPackage) {
         String result = packService.updatePackage(id, updatedPackage);
         return ResponseEntity.ok(result);
     }

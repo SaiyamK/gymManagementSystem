@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gym.entities.Users;
 import com.gym.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -24,7 +26,7 @@ public class UserController {
     private UserService uservice;
 
     @PostMapping("/add")
-    public String addUser(@RequestBody Users u) {
+    public String addUser(@Valid @RequestBody Users u) {
         return uservice.addUser(u);
     }
 
@@ -40,7 +42,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody Users updatedUser) {
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @Valid @RequestBody Users updatedUser) {
         String result = uservice.updateUser(id, updatedUser);
         return ResponseEntity.ok(result);
     }

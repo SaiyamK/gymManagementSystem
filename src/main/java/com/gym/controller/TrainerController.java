@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gym.entities.Trainer;
 import com.gym.service.TrainerService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/trainer")
 public class TrainerController {
@@ -24,7 +26,7 @@ public class TrainerController {
     private TrainerService tservice;
 
     @PostMapping("/add")
-    public String addTrainer(@RequestBody Trainer t) {
+    public String addTrainer(@Valid @RequestBody Trainer t) {
         return tservice.addTrainer(t);
     }
 
@@ -40,7 +42,7 @@ public class TrainerController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateTrainer(@PathVariable Long id, @RequestBody Trainer updatedTrainer) {
+    public ResponseEntity<String> updateTrainer(@PathVariable Long id, @Valid @RequestBody Trainer updatedTrainer) {
         String result = tservice.updateTrainer(id, updatedTrainer);
         return ResponseEntity.ok(result);
     }

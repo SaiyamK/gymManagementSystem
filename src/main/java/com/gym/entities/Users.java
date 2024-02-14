@@ -1,5 +1,7 @@
 package com.gym.entities;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 
 @Entity
@@ -18,14 +21,20 @@ public class Users {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
+	@NotBlank(message = "User name cannot be Blank")
 	@Column(name="userName")
 	private String name;
 
+	@NotBlank(message = "Email cannot be Blank")
 	@Column(name="userEmail")
 	private String email;
 
+	@NotBlank(message = "Phone Number cannot be Blank")
 	@Column(name = "userPhoneNo")
 	private String phoneNo;
+
+	@Column(name = "packageExpiryDate")
+	private LocalDate packageExpiryDate;
 
 	@ManyToOne
 	@JoinColumn(name = "trainerID")
@@ -42,7 +51,7 @@ public class Users {
 	public Users() {}
 
 	public Users(Long id, String name, String email, String phoneNo, Trainer trainer, Packages packages,
-			GymAdmin gymAdmin) {
+			GymAdmin gymAdmin, LocalDate packageExpiryDate) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -50,10 +59,15 @@ public class Users {
 		this.trainer = trainer;
 		this.packages = packages;
 		this.gymAdmin = gymAdmin;
+		this.packageExpiryDate = packageExpiryDate;
 	}
 
-
-
+	public Users(String name, String email, String phoneNo) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.phoneNo = phoneNo;
+	}
 
 	public Long getId() {
 		return id;
@@ -122,12 +136,23 @@ public class Users {
 
 
 
+	public LocalDate getPackageExpiryDate() {
+		return packageExpiryDate;
+	}
+
+	public void setPackageExpiryDate(LocalDate packageExpiryDate) {
+		this.packageExpiryDate = packageExpiryDate;
+	}
 
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", name=" + name + ", email=" + email + ", phoneNo=" + phoneNo + ", trainer="
-				+ trainer + ", packages=" + packages + ", gymAdmin=" + gymAdmin + "]";
+		return "Users [id=" + id + ", name=" + name + ", email=" + email + ", phoneNo=" + phoneNo
+				+ ", packageExpiryDate=" + packageExpiryDate + ", trainer=" + trainer + ", packages=" + packages
+				+ ", gymAdmin=" + gymAdmin + "]";
 	}
+
+
+
 
 
 

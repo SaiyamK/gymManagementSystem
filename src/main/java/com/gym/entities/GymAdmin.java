@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="gymAdmin")
@@ -15,9 +16,11 @@ public class GymAdmin {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long gymID;
 
+	@NotBlank(message = "Gym name cannot be Blank")
 	@Column(name="gymName")
 	private String name;
 
+	@NotBlank(message = "Location cannot be Blank")
 	@Column(name="gymLocation")
 	private String location;
 
