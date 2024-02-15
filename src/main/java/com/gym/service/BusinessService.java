@@ -77,4 +77,23 @@ public class BusinessService {
         }
 	}
 
+	public String renewal(Long userId) {
+		Optional<Users> optionalUser = userRepo.findById(userId);
+        if (optionalUser.isPresent()) {
+            Users existingUser = optionalUser.get();
+            LocalDate todayDate = LocalDate.now();
+            LocalDate renewalDate = null;
+            if (todayDate.isBefore(existingUser.getPackageExpiryDate())) {
+            	renewalDate = existingUser.getPackageExpiryDate().plusMonths(1);
+            } else {
+            	renewalDate = todayDate.plusMonths(1);
+            }
+            existingUser.setPackageExpiryDate(renewalDate);
+            userRepo.save(existingUser);
+            return "Renewal Success, Next Due Date: + " + renewalDate;
+        } else {
+            return "User not found";
+        }
+	}
+
 }
