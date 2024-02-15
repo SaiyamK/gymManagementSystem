@@ -45,6 +45,14 @@ public class Trainer {
 		this.gymAdmin = gymAdmin;
 	}
 
+	public Trainer(Long id, String trainerName, String phoneNo, String specialization) {
+		super();
+		this.id = id;
+		this.trainerName = trainerName;
+		this.phoneNo = phoneNo;
+		this.specialization = specialization;
+	}
+
 	public Long getId() {
 		return id;
 	}

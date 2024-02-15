@@ -36,6 +36,7 @@ public class TrainerService {
             existingTrainer.setPhoneNo(updatedTrainer.getPhoneNo());
             existingTrainer.setGymAdmin(updatedTrainer.getGymAdmin());
             existingTrainer.setTrainerName(updatedTrainer.getTrainerName());
+            existingTrainer.setSpecialization(updatedTrainer.getSpecialization());
             trepo.save(existingTrainer);
             return "Trainer updated successfully";
         } else {
