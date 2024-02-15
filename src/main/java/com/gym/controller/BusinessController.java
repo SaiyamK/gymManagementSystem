@@ -37,7 +37,7 @@ public class BusinessController {
     public String entryInGym(@PathVariable Long userId) {
         return businessService.entryInGym(userId);
     }
-    
+
     @GetMapping("/renewal/{userId}")
     public String renewal(@PathVariable Long userId) {
         return businessService.renewal(userId);

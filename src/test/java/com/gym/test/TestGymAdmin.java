@@ -22,19 +22,19 @@ public class TestGymAdmin {
 
 	@InjectMocks
 	private GymService uservice;
-	
+
 	@Mock
 	private GymRepository uRepo;
-	
+
 	@Test
-	public final void testAddGym() {	
+	public final void testAddGym() {
 		GymAdmin user=new GymAdmin(1L, "Saiyam Gym", "Delhi");
 		when(uRepo.save(user)).thenReturn(user);
 		String message=uservice.addGymAdmin(user);
 		assertNotNull(message);
 		assertEquals(message, "Gym admin added successfully");
 	}
-	
+
 	@Test
     public final void testGetAllGym() {
 		GymAdmin user = new GymAdmin(1L, "Saiyam Gym", "Delhi");
@@ -44,5 +44,5 @@ public class TestGymAdmin {
         assertEquals(user.getName(), uList.get(0).getName());
         assertEquals(user.getLocation(), uList.get(0).getLocation());
     }
-	
+
 }

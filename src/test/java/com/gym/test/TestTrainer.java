@@ -22,19 +22,19 @@ public class TestTrainer {
 
 	@InjectMocks
 	private TrainerService uservice;
-	
+
 	@Mock
 	private TrainerRepository uRepo;
-	
+
 	@Test
-	public final void testAddEmployee() {	
+	public final void testAddEmployee() {
 		Trainer user=new Trainer(1L, "Kuldeep", "9876543210", "Weight", null);
 		when(uRepo.save(user)).thenReturn(user);
 		String message=uservice.addTrainer(user);
 		assertNotNull(message);
 		assertEquals(message, "Trainer added successfully");
 	}
-	
+
 	@Test
     public final void testGetAllEmployee() {
 		Trainer user = new Trainer(1L, "Kuldeep", "9876543210", "Weight", null);
@@ -45,5 +45,5 @@ public class TestTrainer {
         assertEquals(user.getSpecialization(), uList.get(0).getSpecialization());
         assertEquals(user.getPhoneNo(), uList.get(0).getPhoneNo());
     }
-	
+
 }

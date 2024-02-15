@@ -90,7 +90,7 @@ public class BusinessService {
             }
             existingUser.setPackageExpiryDate(renewalDate);
             userRepo.save(existingUser);
-            return "Renewal Success, Next Due Date: + " + renewalDate;
+            return "Renewal Success, Next Due Date: " + renewalDate;
         } else {
             return "User not found";
         }
